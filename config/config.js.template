@@ -1,0 +1,72 @@
+let config = {
+    address: "localhost",
+    port: 8080,
+    ipWhitelist: ["127.0.0.1", "::ffff:127.0.0.1", "::1"],
+    language: "sv",
+    locale: "sv-SE",
+    logLevel: ["INFO", "LOG", "WARN", "ERROR"],
+    timeFormat: 24,
+    units: "metric",
+    modules: [
+        {
+            module: "clock",
+            position: "top_left",
+            config: {},
+        },
+        {
+            module: "calendar",
+            header: "Google Kalender",
+            position: "top_left",
+            config: {
+                calendars: [
+                    {
+                        fetchInterval: 7 * 24 * 60 * 60 * 1000,
+						symbol: "calendar-check",
+                        url: "${GOO_CALENDAR}"
+                    }
+                ]
+            }
+        },
+        {
+            module: "compliments",
+            position: "lower_third"
+        },
+        {
+            module: "weather",
+            position: "top_right",
+            config: {
+                weatherProvider: "openmeteo",
+                type: "current",
+                lat: "${LAT}",
+                lon: "${LON}"
+            }
+        },
+        {
+            module: "weather",
+            position: "top_right",
+            header: "Väderprognos",
+            config: {
+                weatherProvider: "openmeteo",
+                type: "forecast",
+                lat: "${LAT}",
+                lon: "${LON}"
+            }
+        },
+        {
+            module: "MMM-OnSpotify",
+            position: "bottom_left",
+            config: {
+                clientID: "${SPO_CLIENTID}",
+                clientSecret: "${SPO_SECRRET}",
+                accessToken: "${SPO_ACCESS_TOKEN}",
+                refreshToken: "${SPO_REFRESH_TOKEN}",
+                hideTrackLengthAndAnimateProgress: false,
+                isPlaying: 1,
+            }
+        },
+
+    ],
+};
+
+/*************** DO NOT EDIT THE LINE BELOW ***************/
+if (typeof module !== "undefined") { module.exports = config; }
